@@ -12,6 +12,3 @@ Werkzeug==2.2.2
 
 # SQLAlchemy dependency
 SQLAlchemy==2.0.3
-
-# Python typing
-typing_extensions==4.4.0
