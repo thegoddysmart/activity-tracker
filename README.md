@@ -34,4 +34,4 @@ This App has just two models having a one-to-many relationship and make use of t
 
 ## Hosting
 
-This app is hosted on render and can be accessed from this link [here]()
+This app is hosted on render and can be accessed from this link [here](https://web-production-9fe22.up.railway.app/)
