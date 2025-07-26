@@ -15,7 +15,7 @@ Base = declarative_base()
 class Status(Enums):
     PENDING = 'PENDING'
     IN_PROGRESS = 'IN_PROGRESS'
-    DONE = 'DONE'
+    COMPLETED = 'COMPLETED'
 
     def __str__(self):
         return self.value
