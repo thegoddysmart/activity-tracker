@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Link main.css first for global styles -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+    />
+    <script src="/static/script.js"></script>
+    <!-- <script
+      src="{{ url_for('static', filename='js/dashboard.js') }}"
+      defer
+    ></script> -->
+    <title>Activity Tracker Dashboard</title>
+  </head>
+  <body>
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="user-profile">
+          <img
+            src="{{ url_for('static', filename='images/user.png') }}"
+            alt="User Avatar"
+          />
+          <h2>Hello, {{ user.name }}</h2>
+        </div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="#" class="active">My Activities</a></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </nav>
+        <div class="sidebar-actions">
+          <form method="POST" action="{{ url_for('logout') }}">
+            <button type="submit" class="btn btn-secondary">Logout</button>
+          </form>
+          <button onclick="confirmDelete()" class="btn btn-danger">
+            Delete Account
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="main-header">
+          <h1>Activity Tracker Dashboard</h1>
+        </header>
+
+        <section class="add-task-section card">
+          <h2>Add New Task</h2>
+          <form
+            method="POST"
+            action="{{ url_for('add_task') }}"
+            class="add-task-form"
+          >
+            <div class="form-group">
+              <label for="title">Task Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                required
+                placeholder="e.g., Finish project report"
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                required
+                placeholder="Describe your task..."
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Task</button>
+          </form>
+        </section>
+
+        <section class="task-list-section card">
+          <h2>Your Tasks</h2>
+          {% if tasks %}
+          <table>
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Date Created</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for task in tasks %}
+              <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+                <td data-label="Status">
+                  <span
+                    class="status-badge status-{{ task.status.value.lower() }}"
+                    >{{ task.status.value }}</span
+                  >
+                </td>
+                <td>
+                  <a
+                    href="{{ url_for('view_task', task_id=task.id) }}"
+                    class="btn btn-sm"
+                    >View Details</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p class="no-tasks-message">
+            You haven't added any tasks yet. Start by adding one above!
+          </p>
+          {% endif %}
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

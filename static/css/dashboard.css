@@ -1,0 +1,444 @@
+/* Global styles & Typography */
+:root {
+  --primary-color: #4a90e2; /* Blue */
+  --secondary-color: #50e3c2; /* Teal */
+  --accent-color: #f5a623; /* Orange */
+  --text-color-dark: #333;
+  --text-color-light: #666;
+  --bg-light: #f8f8f8;
+  --bg-dark: #e0e0e0;
+  --border-color: #ddd;
+  --card-bg: #fff;
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color-dark);
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* Dashboard Layout */
+.dashboard-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  box-shadow: var(--shadow-medium);
+}
+
+.user-profile {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.user-profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 3px solid var(--primary-color);
+}
+
+.user-profile h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0;
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.main-nav li {
+  margin-bottom: 10px;
+}
+
+.main-nav a {
+  display: block;
+  padding: 12px 15px;
+  color: var(--text-color-dark);
+  text-decoration: none;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  background-color: var(--primary-color);
+  color: var(--card-bg);
+  box-shadow: var(--shadow-light);
+}
+
+.sidebar-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Main Content Area */
+.main-content {
+  flex-grow: 1;
+  padding: 30px;
+  background-color: var(--bg-light);
+}
+
+.main-header {
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.main-header h1 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* Cards (Sections) */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
+  padding: 25px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border-color);
+}
+
+.card h2 {
+  font-size: 1.6rem;
+  color: var(--text-color-dark);
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--bg-dark);
+  padding-bottom: 10px;
+}
+
+/* Form Styles */
+.add-task-form {
+  display: grid;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 0; /* Handled by grid gap */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-color-dark);
+  font-size: 0.95rem;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-color-dark);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none; /* For anchor buttons */
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--card-bg);
+  box-shadow: var(--shadow-light);
+}
+
+.btn-primary:hover {
+  background-color: #3a7dc7; /* Darker primary */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.btn-secondary {
+  background-color: var(--bg-dark);
+  color: var(--text-color-dark);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: #d0d0d0; /* Darker grey */
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: #e74c3c; /* Red */
+  color: var(--card-bg);
+}
+
+.btn-danger:hover {
+  background-color: #c0392b; /* Darker red */
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 8px 15px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  background-color: var(--secondary-color);
+  color: var(--card-bg);
+}
+
+.btn-sm:hover {
+  background-color: #42c2a0;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: separate; /* For rounded corners on cells */
+  border-spacing: 0;
+  margin-bottom: 0; /* No margin if inside a card */
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 15px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: var(--bg-dark);
+  color: var(--text-color-dark);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* Rounded corners for first/last cells in header/body */
+table thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+table thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+tbody tr:hover {
+  background-color: rgba(74, 144, 226, 0.05); /* Light hover effect */
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--card-bg);
+}
+
+.status-completed {
+  background-color: #28a745; /* Green */
+}
+
+.status-pending {
+  background-color: #ffc107; /* Yellow */
+  color: var(--text-color-dark); /* Dark text for yellow background */
+}
+
+.status-in-progress {
+  background-color: #17a2b8; /* Teal-blue */
+}
+
+/* Example for 'todo' status if it exists */
+.status-todo {
+  background-color: #6c757d; /* Grey */
+}
+
+/* No tasks message */
+.no-tasks-message {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 1.1rem;
+  color: var(--text-color-light);
+  background-color: var(--bg-dark);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column; /* Stack sidebar and main content */
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    align-items: center; /* Center content in mobile sidebar */
+    text-align: center;
+  }
+
+  .sidebar .user-profile {
+    margin-bottom: 20px;
+    border-bottom: none;
+  }
+
+  .sidebar-actions {
+    flex-direction: row; /* Buttons side-by-side */
+    justify-content: center;
+    width: 100%;
+    border-top: none;
+    padding-top: 10px;
+  }
+
+  .main-nav ul {
+    display: flex; /* Horizontal nav for mobile */
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .main-nav li {
+    margin: 5px 10px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .main-header h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block; /* Make table responsive by stacking cells */
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+  }
+
+  td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-color-light);
+  }
+
+  td:first-child:before {
+    content: "Task";
+  }
+  td:nth-child(2):before {
+    content: "Created";
+  }
+  td:nth-child(3):before {
+    content: "Status";
+  }
+  td:nth-child(4):before {
+    content: "Actions";
+  }
+
+  td:first-child,
+  td:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}

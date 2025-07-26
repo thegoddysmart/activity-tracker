@@ -1,0 +1,278 @@
+/* static/css/task.css */
+
+/* ------------------------------------ */
+/* Page Wrapper & Layout                */
+/* ------------------------------------ */
+body {
+  /* Main.css sets base body styles. We'll enhance the overall page background here. */
+  background-color: var(--bg-light); /* Fallback */
+  background-image: linear-gradient(
+    135deg,
+    var(--bg-light) 0%,
+    var(--bg-dark) 100%
+  ); /* Subtle gradient background */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.task-page-wrapper {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* More pronounced, soft shadow */
+  padding: var(--spacing-xl); /* Generous padding for the main wrapper */
+  width: 100%;
+  max-width: 900px; /* Wider than before to allow more content space */
+  border: 1px solid var(--border-color);
+  transform: translateY(0); /* For potential entry animation */
+  transition: transform 0.5s ease-out, box-shadow 0.3s ease;
+}
+
+/* ------------------------------------ */
+/* Header Section                       */
+/* ------------------------------------ */
+.task-header-section {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on small screens */
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--bg-dark); /* Lighter separator */
+}
+
+.task-header-section .btn-back {
+  /* Uses .btn, .btn-secondary from main.css */
+  order: 1; /* First item on small screens */
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  box-shadow: var(--shadow-light); /* Add shadow for button */
+}
+
+.task-header-section .btn-back svg {
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.task-title-main {
+  order: 2; /* Second item */
+  flex-grow: 1; /* Allows title to take available space */
+  font-size: 2.8rem; /* Larger, more impactful title */
+  color: var(--primary-color);
+  font-weight: 800; /* Bolder */
+  margin: 0;
+  text-align: right; /* Default align right */
+  letter-spacing: -0.03em; /* Tighten letter spacing slightly */
+  line-height: 1.1;
+  margin-left: var(--spacing-md); /* Space from back button */
+}
+
+.task-status-display {
+  /* Uses .status-badge from main.css */
+  order: 3; /* Third item */
+  margin-top: var(--spacing-sm); /* Space below title on small screens */
+  padding: 8px 18px; /* Slightly larger padding for prominence */
+  font-size: 0.95rem;
+  font-weight: 700; /* Bolder status text */
+  min-width: 140px; /* Ensure badge is wide enough */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* More prominent badge shadow */
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.task-status-display:hover {
+  transform: translateY(-2px); /* Lift on hover */
+}
+
+/* ------------------------------------ */
+/* Main Content Area                    */
+/* ------------------------------------ */
+.task-content-area {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Two columns: details wide, actions narrower */
+  gap: var(--spacing-lg); /* Gap between sections */
+}
+
+.task-info-card,
+.task-actions-card {
+  /* Uses .card from main.css */
+  margin-bottom: 0; /* Remove default card margin, grid handles spacing */
+  padding: var(--spacing-lg); /* Consistent padding within cards */
+  display: flex; /* Use flexbox for inner card content */
+  flex-direction: column;
+}
+
+.task-info-card h2,
+.task-actions-card h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--border-color); /* Thicker border for section titles */
+  letter-spacing: -0.02em;
+}
+
+/* ------------------------------------ */
+/* Task Details List (dl)               */
+/* ------------------------------------ */
+.task-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md); /* Space between detail groups */
+  margin-bottom: 0; /* No default margin */
+  flex-grow: 1; /* Make list fill available space */
+}
+
+.detail-group {
+  display: flex;
+  flex-wrap: wrap; /* Allow label and value to wrap */
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px dotted var(--bg-dark); /* Subtle dotted separator */
+}
+
+.detail-group:last-child {
+  border-bottom: none; /* No border for the last item */
+  padding-bottom: 0;
+}
+
+.detail-label {
+  font-weight: 700; /* Bolder label */
+  color: var(--text-color-light);
+  width: 160px; /* Slightly wider fixed width for labels */
+  flex-shrink: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: var(--spacing-md);
+}
+
+.detail-value {
+  flex-grow: 1;
+  color: var(--text-color-dark);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.task-description-text {
+  /* Specific styling for the description */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-style: italic; /* Emphasize description slightly */
+  color: var(--text-color-dark);
+  line-height: 1.7; /* Better readability for long text */
+  font-size: 1.1rem;
+  padding-top: var(--spacing-xs); /* Little space from label on top */
+  margin-top: -5px; /* Pull up to align with label */
+  margin-left: 160px; /* Match label width */
+}
+
+/* ------------------------------------ */
+/* Button Group for Actions             */
+/* ------------------------------------ */
+.task-action-buttons {
+  display: flex;
+  flex-direction: column; /* Stack buttons by default */
+  gap: var(--spacing-md); /* Space between stacked buttons */
+  flex-grow: 1; /* Make button group fill available space */
+}
+
+.task-action-buttons .btn-block {
+  width: 100%; /* Make buttons full width in this group */
+  padding: 15px 25px; /* Larger hit area */
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* ------------------------------------ */
+/* Responsive Adjustments               */
+/* ------------------------------------ */
+@media (max-width: 900px) {
+  /* Adjust breakpoint for larger content width */
+  .task-page-wrapper {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .task-header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .task-header-section .btn-back {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .task-title-main {
+    font-size: 2.2rem;
+    text-align: left;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .task-status-display {
+    width: 100%;
+    text-align: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .task-content-area {
+    grid-template-columns: 1fr; /* Stack columns on small screens */
+    gap: var(--spacing-md);
+  }
+
+  .task-info-card,
+  .task-actions-card {
+    padding: var(--spacing-md);
+  }
+
+  .task-info-card h2,
+  .task-actions-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .detail-group {
+    flex-direction: column; /* Stack label and value */
+    align-items: flex-start;
+  }
+
+  .detail-label {
+    width: auto; /* Remove fixed width */
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+  }
+
+  .task-description-text {
+    margin-left: 0; /* Remove indent */
+  }
+
+  .button-group {
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 500px) {
+  .task-page-wrapper {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .task-header-section {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .task-title-main {
+    font-size: 1.8rem;
+  }
+
+  .task-status-display {
+    font-size: 0.9rem;
+    min-width: unset;
+    padding: 6px 15px;
+  }
+}

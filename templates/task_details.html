@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/task.css') }}"
+    />
+    <script
+      src="{{ url_for('static', filename='js/task_details.js') }}"
+      defer
+    ></script>
+    <title>Task Details: {{ task.title }}</title>
+  </head>
+  <body>
+    <div class="task-page-wrapper">
+      <header class="task-header-section">
+        <a
+          href="{{ url_for('index') }}"
+          class="btn btn-secondary btn-icon-left"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-arrow-left"
+          >
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to Dashboard
+        </a>
+        <h1 class="task-title-main">{{ task.title }}</h1>
+        <span
+          class="task-status-display status-badge status-{{ task.status.value.lower() }}"
+          >{{ task.status.value }}</span
+        >
+      </header>
+
+      <main class="task-content-area">
+        <section class="task-info-card card">
+          <h2>Details</h2>
+          <dl class="task-details-list">
+            <div class="detail-group">
+              <dt class="detail-label">Description</dt>
+              <dd class="detail-value task-description-text">
+                {{ task.description }}
+              </dd>
+            </div>
+            <div class="detail-group">
+              <dt class="detail-label">Created At</dt>
+              <dd class="detail-value">
+                {{ task.created_at.strftime("%Y-%m-%d %H:%M:%S") }}
+              </dd>
+            </div>
+            <div class="detail-group">
+              <dt class="detail-label">Last Updated</dt>
+              <dd class="detail-value">
+                {{ task.updated_at.strftime("%Y-%m-%d %H:%M:%S") }}
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="task-actions-card card">
+          <h2>Actions</h2>
+          <div class="button-group task-action-buttons">
+            {% if task.status.value.lower() != 'in_progress' %}
+            <form
+              method="POST"
+              action="{{ url_for('update_status', task_id=task.id) }}"
+            >
+              <input type="hidden" name="status" value="IN_PROGRESS" />
+              <button type="submit" class="btn btn-info btn-block">
+                Mark In Progress
+              </button>
+            </form>
+            {% endif %} {% if task.status.value.lower() != 'completed' %}
+            <form
+              method="POST"
+              action="{{ url_for('update_status', task_id=task.id) }}"
+            >
+              <input type="hidden" name="status" value="COMPLETED" />
+              <button type="submit" class="btn btn-success btn-block">
+                Mark as Completed
+              </button>
+            </form>
+            {% endif %}
+
+            <form
+              method="POST"
+              action="{{ url_for('delete_task', task_id=task.id) }}"
+              onsubmit="return confirmDeleteTask()"
+            >
+              <button type="submit" class="btn btn-danger btn-block">
+                Delete Task
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      // static/js/task_details.js (assuming this is where your script resides)
+      function confirmDeleteTask() {
+        return confirm(
+          "Are you sure you want to delete this task? This action cannot be undone."
+        );
+      }
+    </script>
+  </body>
+</html>
